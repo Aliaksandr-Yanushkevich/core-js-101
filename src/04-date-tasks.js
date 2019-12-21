@@ -19,8 +19,8 @@
  *    'Tue, 26 Jan 2016 13:48:02 GMT' => Date()
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
-function parseDataFromRfc2822(/* value */) {
-  throw new Error('Not implemented');
+function parseDataFromRfc2822(value) {
+  return Date.parse(value);
 }
 
 /**
@@ -34,8 +34,8 @@ function parseDataFromRfc2822(/* value */) {
  *    '2016-01-19T16:07:37+00:00'    => Date()
  *    '2016-01-19T08:07:37Z' => Date()
  */
-function parseDataFromIso8601(/* value */) {
-  throw new Error('Not implemented');
+function parseDataFromIso8601(value) {
+  return Date.parse(value);
 }
 
 
@@ -53,8 +53,15 @@ function parseDataFromIso8601(/* value */) {
  *    Date(2012,1,1)    => true
  *    Date(2015,1,1)    => false
  */
-function isLeapYear(/* date */) {
-  throw new Error('Not implemented');
+function isLeapYear(date) {
+  let res;
+  const year = date.getFullYear();
+  if (((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0)) {
+    res = true;
+  } else {
+    res = false;
+  }
+  return res;
 }
 
 
@@ -75,6 +82,13 @@ function isLeapYear(/* date */) {
  */
 function timeSpanToString(/* startDate, endDate */) {
   throw new Error('Not implemented');
+  // start = new startDate;
+  // const diff = endDate - startDate;
+  // const hour = diff.getHours();
+  // const min = diff.getMinutes();
+  // const sec = diff.getSeconds();
+  // const msec = diff.getMilliseconds();
+  // return `${hour}:${min}:${sec}.${msec}`;
 }
 
 
@@ -92,8 +106,22 @@ function timeSpanToString(/* startDate, endDate */) {
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
-function angleBetweenClockHands(/* date */) {
-  throw new Error('Not implemented');
+function angleBetweenClockHands(date) {
+  // console.log(Date.UTC(2016,3,5, 3, 0))
+  const hour = date / 3600000 / 12 - Math.floor(date / 3600000 / 12);
+  // console.log(hour);
+  let hourAngle = Math.floor(hour) * 60 * 0.5;
+  if (hourAngle > 180) {
+    hourAngle -= 180;
+  }
+  const min = (hour - Math.floor(hour)) * 60;
+  // console.log(min);
+  let minAngle = Math.floor(min) * 6;
+  if (minAngle > 180) {
+    minAngle -= 180;
+  }
+  // console.log((Math.abs(hourAngle - minAngle) * Math.PI) / 180)
+  return (Math.abs(hourAngle - minAngle) * Math.PI) / 180;
 }
 
 

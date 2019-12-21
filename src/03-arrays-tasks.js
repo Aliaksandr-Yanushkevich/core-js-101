@@ -20,8 +20,8 @@
  *    ['Array', 'Number', 'string'], 'Date'    => -1
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
-function findElement(/* arr, value */) {
-  throw new Error('Not implemented');
+function findElement(arr, value) {
+  return arr.indexOf(value);
 }
 
 /**
@@ -35,8 +35,13 @@ function findElement(/* arr, value */) {
  *    2 => [ 1, 3 ]
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  let startIndex = 1;
+  return Array(len).fill(0).map(() => {
+    const el = startIndex;
+    startIndex += 2;
+    return el;
+  });
 }
 
 
@@ -52,8 +57,13 @@ function generateOdds(/* len */) {
  *    [0, 1, 2, 3, 4, 5] => [0, 1, 2, 3, 4, 5,   0, 1, 2, 3, 4, 5]
  *    [] => []
  */
-function doubleArray(/* arr */) {
-  throw new Error('Not implemented');
+function doubleArray(arr) {
+  const output = [];
+  if (arr.length !== 0) {
+    arr.map((item) => output.push(item));
+    arr.map((item) => output.push(item));
+  }
+  return output;
 }
 
 
@@ -68,8 +78,15 @@ function doubleArray(/* arr */) {
  *    [-1, 2, -5, -4, 0] => [ 2 ]
  *    [] => []
  */
-function getArrayOfPositives(/* arr */) {
-  throw new Error('Not implemented');
+function getArrayOfPositives(arr) {
+  const res = [];
+  arr.map((item) => {
+    if (item > 0) {
+      res.push(item);
+    }
+    return res;
+  });
+  return res;
 }
 
 /**
@@ -83,8 +100,15 @@ function getArrayOfPositives(/* arr */) {
  *    [ 1, 2, 3, 4, 5 ] => []
  *    [ 'cat, 'dog', 'raccoon' ] => [ 'cat', 'dog', 'raccoon' ]
  */
-function getArrayOfStrings(/* arr */) {
-  throw new Error('Not implemented');
+function getArrayOfStrings(arr) {
+  const res = [];
+  arr.map((item) => {
+    if (typeof item === 'string') {
+      res.push(item);
+    }
+    return res;
+  });
+  return res;
 }
 
 /**
@@ -100,8 +124,15 @@ function getArrayOfStrings(/* arr */) {
  *    [ 1, 2, 3, 4, 5, 'false' ]         => [ 1, 2, 3, 4, 5, 'false' ]
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
-function removeFalsyValues(/* arr */) {
-  throw new Error('Not implemented');
+function removeFalsyValues(arr) {
+  const res = [];
+  arr.map((item) => {
+    if (item) {
+      res.push(item);
+    }
+    return res;
+  });
+  return res;
 }
 
 /**
@@ -115,8 +146,13 @@ function removeFalsyValues(/* arr */) {
  *    => [ 'PERMANENT-INTERNSHIP', 'GLUTINOUS-SHRIEK', 'MULTIPLICATIVE-ELEVATION' ],
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
-function getUpperCaseStrings(/* arr */) {
-  throw new Error('Not implemented');
+function getUpperCaseStrings(arr) {
+  const res = [];
+  arr.map((item) => {
+    res.push(item.toUpperCase());
+    return res;
+  });
+  return res;
 }
 
 
@@ -370,8 +406,15 @@ function getFalsyValuesCount(/* arr */) {
  *    [ null, undefined, null ], null => 2
  *    [ true, 0, 1, 'true' ], true => 1
  */
-function findAllOccurences(/* arr, item */) {
-  throw new Error('Not implemented');
+function findAllOccurences(arr, item) {
+  let cnt = 0;
+  arr.map((e) => {
+    if (e === item) {
+      cnt += 1;
+    }
+    return cnt;
+  });
+  return cnt;
 }
 
 /**
@@ -385,8 +428,8 @@ function findAllOccurences(/* arr, item */) {
  *    [1, 2, 3, 4, 5]                   => '1,2,3,4,5'
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
-function toStringList(/* arr */) {
-  throw new Error('Not implemented');
+function toStringList(arr) {
+  return arr.toString();
 }
 
 
@@ -418,6 +461,18 @@ function toStringList(/* arr */) {
  */
 function sortCitiesArray(/* arr */) {
   throw new Error('Not implemented');
+  // let res;
+  // arr.sort((a, b) => {
+  //   if (a.country > b.country) {
+  //     res = 1;
+  //   } else if (a.country < b.country) {
+  //     res = -1;
+  //   } else {
+  //     res = a.city - b.city;
+  //   }
+  //   return res;
+  // });
+  // return arr;
 }
 
 /**
@@ -455,8 +510,8 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  return Array(end - start + 1).fill().map((_, idx) => start + idx);
 }
 
 /**
