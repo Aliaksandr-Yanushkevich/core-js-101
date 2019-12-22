@@ -514,20 +514,21 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
-  // let res;
-  // arr.sort((a, b) => {
-  //   if (a.country > b.country) {
-  //     res = 1;
-  //   } else if (a.country < b.country) {
-  //     res = -1;
-  //   } else {
-  //     res = a.city - b.city;
-  //   }
-  //   return res;
-  // });
-  // return arr;
+function sortCitiesArray(arr) {
+  return arr.sort((a, b) => {
+    if (a.country === b.country) {
+      if (a.city > b.city) {
+        return 1;
+      }
+      if (a.city < b.city) {
+        return -1;
+      }
+    }
+    if (a.country < b.country) {
+      return -1;
+    }
+    return 1;
+  });
 }
 
 /**
@@ -585,8 +586,15 @@ function getIntervalArray(start, end) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const res = [];
+  arr.map((item) => {
+    if (res.indexOf(item) === -1) {
+      res.push(item);
+    }
+    return res;
+  });
+  return res;
 }
 
 /**
@@ -637,8 +645,11 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.reduce((accumulator, item) => {
+    accumulator.push(...childrenSelector(item));
+    return accumulator;
+  }, []);
 }
 
 
@@ -677,8 +688,25 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  let head;
+  let body;
+  let tail;
+  const res = [];
+  if (arr.length % 2 === 0) {
+    head = arr.slice(0, arr.length / 2);
+    tail = arr.slice(arr.length / 2, arr.length);
+    tail.map((item) => res.push(item));
+    head.map((item) => res.push(item));
+  } else {
+    head = arr.slice(0, Math.floor(arr.length / 2));
+    body = arr.slice(Math.floor(arr.length / 2), Math.floor(arr.length / 2) + 1);
+    tail = arr.slice(Math.floor(arr.length / 2) + 1, arr.length);
+    tail.map((item) => res.push(item));
+    body.map((item) => res.push(item));
+    head.map((item) => res.push(item));
+  }
+  return res;
 }
 
 
